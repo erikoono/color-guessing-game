@@ -16,7 +16,8 @@ backend:
         - export PATH=$PATH:$HOME/go/bin
         - export GOPATH=$HOME/gopath
         - export GOMODCACHE=$HOME/gopath/pkg/mod
-        - amplifyPush --simple
+        # 既存のリソースを使用するためのフラグを追加
+        - amplifyPush --simple --allow-destructive-graphql-schema-updates --yes
 frontend:
   phases:
     preBuild:
