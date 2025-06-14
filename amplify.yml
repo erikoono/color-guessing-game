@@ -11,13 +11,16 @@ backend:
         - export GOMODCACHE=$HOME/gopath/pkg/mod
         - mkdir -p $GOPATH/pkg/mod
         - go version
+        # 既存の環境を使用するように設定
+        - amplify env checkout main --restore
+        - amplify env pull --yes
     build:
       commands:
         - export PATH=$PATH:$HOME/go/bin
         - export GOPATH=$HOME/gopath
         - export GOMODCACHE=$HOME/gopath/pkg/mod
-        # 既存のリソースを使用するためのフラグを追加
-        - amplifyPush --simple --allow-destructive-graphql-schema-updates --yes
+        # 更新のみを行うフラグを追加
+        - amplifyPush --simple --yes
 frontend:
   phases:
     preBuild:
