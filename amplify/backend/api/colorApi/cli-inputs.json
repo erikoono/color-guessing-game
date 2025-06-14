@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "paths": {
+    "/color": {
+      "name": "/color",
+      "lambdaFunction": "colorFunction",
+      "permissions": {
+        "setting": "private",
+        "auth": [
+          "create",
+          "read",
+          "update",
+          "delete"
+        ]
+      }
+    }
+  }
+}

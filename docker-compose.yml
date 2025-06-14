@@ -1,0 +1,57 @@
+version: '3'
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    volumes:
+      - ./backend:/app
+    command: go run main.go
+    ports:
+      - "8080:8080"
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    command: nginx -g 'daemon off;'
+
+  frontend-test:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+      target: test
+    volumes:
+      - ./frontend:/app
+    command: sh -c "npm install && npm install --save-dev jest-environment-jsdom @testing-library/jest-dom @testing-library/react babel-jest react react-dom html-webpack-plugin style-loader css-loader && npm test"
+      
+  frontend-coverage:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+      target: test
+    volumes:
+      - ./frontend:/app
+      - ./coverage:/app/coverage
+    command: sh -c "npm install && npm install --save-dev jest-environment-jsdom @testing-library/jest-dom @testing-library/react babel-jest react react-dom html-webpack-plugin style-loader css-loader && npm run test:coverage"
+
+  backend-test:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    volumes:
+      - ./backend:/app
+    entrypoint: ["go", "test", "./..."]
+      
+  backend-coverage:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    volumes:
+      - ./backend:/app
+      - ./coverage:/coverage
+    command: sh -c "go test -coverprofile=coverage.out ./... && go tool cover -html=coverage.out -o /coverage/backend-coverage.html"
