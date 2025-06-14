@@ -11,13 +11,16 @@ backend:
         - export GOMODCACHE=$HOME/gopath/pkg/mod
         - mkdir -p $GOPATH/pkg/mod
         - go version
-        - amplify init --appId d3aavb18oeobu6 --envName main --yes
+        # 新しい環境を作成
+        - amplify init --yes
     build:
       commands:
         - export PATH=$PATH:$HOME/go/bin
         - export GOPATH=$HOME/gopath
         - export GOMODCACHE=$HOME/gopath/pkg/mod
-        - amplifyPush --simple --yes
+        - amplify add function --yes
+        - amplify add api --yes
+        - amplify push --yes
 frontend:
   phases:
     preBuild:
