@@ -1,0 +1,30 @@
+version: 1
+backend:
+  phases:
+    preBuild:
+      commands:
+        - wget https://golang.org/dl/go1.21.0.linux-amd64.tar.gz
+        - tar -C /usr/local -xzf go1.21.0.linux-amd64.tar.gz
+        - export PATH=$PATH:/usr/local/go/bin
+        - go version
+    build:
+      commands:
+        - amplifyPush --simple
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - cd frontend
+        - npm ci
+    build:
+      commands:
+        - cd frontend
+        - npm run build
+  artifacts:
+    baseDirectory: frontend/dist
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
+      - frontend/node_modules/**/*
