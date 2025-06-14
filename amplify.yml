@@ -4,11 +4,13 @@ backend:
     preBuild:
       commands:
         - wget https://golang.org/dl/go1.21.0.linux-amd64.tar.gz
-        - tar -C /usr/local -xzf go1.21.0.linux-amd64.tar.gz
-        - export PATH=$PATH:/usr/local/go/bin
+        - mkdir -p $HOME/go
+        - tar -C $HOME -xzf go1.21.0.linux-amd64.tar.gz
+        - export PATH=$PATH:$HOME/go/bin
         - go version
     build:
       commands:
+        - export PATH=$PATH:$HOME/go/bin
         - amplifyPush --simple
 frontend:
   phases:
