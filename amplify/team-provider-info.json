@@ -32,5 +32,39 @@
         }
       }
     }
+  },
+  "main": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-colorguessinggame-main-43adf-authRole",
+      "UnauthRoleArn": "arn:aws:iam::822290618617:role/amplify-colorguessinggame-main-43adf-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::822290618617:role/amplify-colorguessinggame-main-43adf-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-colorguessinggame-main-43adf-deployment",
+      "UnauthRoleName": "amplify-colorguessinggame-main-43adf-unauthRole",
+      "StackName": "amplify-colorguessinggame-main-43adf",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:822290618617:stack/amplify-colorguessinggame-main-43adf/caca5150-490b-11f0-a62f-0a93f207963f",
+      "AmplifyAppId": "dqp5ew4qw2jdi",
+      "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-colorguessinggame-main-43adf-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
+    },
+    "categories": {
+      "auth": {
+        "colorguessinggame": {}
+      },
+      "function": {
+        "colorFunction": {
+          "deploymentBucketName": "amplify-colorguessinggame-main-43adf-deployment",
+          "s3Key": "amplify-builds/colorFunction-3279326b4b6e7635444c-build.zip"
+        }
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "dqp5ew4qw2jdi",
+          "type": "manual"
+        }
+      },
+      "api": {
+        "colorApi": {}
+      }
+    }
   }
 }
